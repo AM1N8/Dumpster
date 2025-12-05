@@ -1,0 +1,116 @@
+# GameVerse User Guide
+
+Welcome to GameVerse! This guide will help you navigate the store, find your favorite games, and make the most of our AI-powered features.
+
+---
+
+## 🏠 Home Page
+
+The Home page is your starting point for discovering content.
+
+### **Featured Games**
+At the top, you will find a curated selection of our most popular and high-rated titles.
+
+### **Special Offers**
+Look here for games that are currently free or heavily discounted.
+
+### **Quick Actions**
+Use the shortcut cards at the bottom to jump straight to:
+- The full game catalog
+- Your user profile
+
+---
+
+## 🔍 Browsing & Searching
+
+Navigate to the **Browse** page to explore our entire library.
+
+### **Finding Games**
+
+#### **Search Bar**
+Type any part of a game's title in the search box to find it instantly.
+
+#### **Filters**
+- **Category:** Narrow by genre (Action, RPG, Strategy, etc.)
+- **Price Range:** Filter by budget (Free, Under $20, $40+, etc.)
+
+### **Game Cards**
+
+Each game card allows you to:
+- **Add to Cart:** Add the item to your basket
+- **Wishlist:** Save the game to buy later
+- **Details:** Expand to view description, developer info, release date, rating, etc.
+
+---
+
+## 🤖 AI Assistant (Chatbot)
+
+The AI Chatbot is your personal gaming concierge. It remembers your conversation context, so you can ask follow-up questions naturally.
+
+### **What can you ask?**
+- "Recommend me a strategy game under $20."
+- "Tell me more about the game *Cyber Odyssey*."
+- "I have a technical issue with my account."
+
+**Tip:**  
+Your chat history is saved even if you switch pages, so you don't lose the conversation while browsing.
+
+---
+
+## 🛒 Shopping Cart & Checkout
+
+Manage your purchases in the **Cart** section.
+
+### **Review Items**
+View all games currently in your basket along with their prices.
+
+### **Remove Items**
+Changed your mind? Click **Remove** next to any game.
+
+### **Checkout**
+Click **Proceed to Checkout** to finalize your purchase.
+
+> **Note:** This is a simulation. No real money is charged.  
+> After checkout, you will see a celebration animation, and your **Total Spent** statistic will update.
+
+---
+
+## ❤️ Wishlist
+
+The Wishlist is for games you aren’t ready to buy yet.
+
+### **Quick Move**
+Ready to purchase? Click **Add to Cart** directly from your wishlist.
+
+### **Manage**
+You can remove games from this list anytime.
+
+---
+
+## 👤 User Profile
+
+Your personal command center.
+
+### **Login (Demo Mode)**
+
+If logged out, use the built-in demo account:
+
+- **Username:** DemoUser123  
+- **Password:** demo123
+
+### **Dashboard Stats**
+
+Once logged in, you can track:
+- **Games Owned** — Total purchased games  
+- **Total Spent** — Cumulative purchase value  
+- **Wishlist Count** — Items saved for later  
+
+---
+
+## 📊 Analytics Dashboard
+
+This section provides transparency into platform activity. You can view:
+
+- **Community Activity:** Number of queries users send to the AI  
+- **Sales Trends:** Daily sales performance charts  
+- **Catalog Stats:** Breakdown of games by genre, platform, and price segment  

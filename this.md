@@ -1,11 +1,11 @@
-# 🎓 Analyse du Code Source — Plateforme Éducative IA
+# Analyse du Code Source — Plateforme Éducative IA
 
-> **Document technique destiné à l'enseignant**  
-> Ce document analyse la structure interne et le fonctionnement du code Java de la plateforme éducative.
+**Document technique destiné à l'enseignant**  
+Ce document analyse la structure interne et le fonctionnement du code Java de la plateforme éducative.
 
 ---
 
-## 📋 Table des Matières
+## Table des Matières
 
 1. [Organisation du Code](#1-organisation-du-code)
 2. [Point d'Entrée et Flux Global](#2-point-dentrée-et-flux-global)
@@ -22,11 +22,11 @@
 
 ```mermaid
 graph TB
-    subgraph "📦 Structure des Packages"
+    subgraph "Structure des Packages"
         direction TB
-        APP["🚀 AiPlatformApplication.java<br/><i>Point d'entrée</i>"]
+        APP["AiPlatformApplication.java<br/><i>Point d'entrée</i>"]
         
-        subgraph AI["🤖 ai/ - Couche IA"]
+        subgraph AI["ai/ - Couche IA"]
             AGENT["AgentIA"]
             RAG["RAGEngine"]
             GROQ["GroqClient"]
@@ -34,28 +34,28 @@ graph TB
             MAST["MasteryAgent"]
         end
         
-        subgraph CTRL["🎮 controller/ - Présentation"]
+        subgraph CTRL["controller/ - Présentation"]
             QC["QuizController"]
             CC["CourseController"]
             DC["DashboardController"]
             AC["AdminController"]
         end
         
-        subgraph SVC["⚙️ service/ - Métier"]
+        subgraph SVC["service/ - Métier"]
             QS["QuizService"]
             CS["CourseService"]
             US["UserService"]
             ES["EnrollmentService"]
         end
         
-        subgraph MDL["📊 model/ - Données"]
+        subgraph MDL["model/ - Données"]
             USER["User"]
             COURSE["Course"]
             QUIZ["Quiz"]
             QUEST["Question"]
         end
         
-        subgraph REPO["💾 repository/"]
+        subgraph REPO["repository/"]
             UR["UserRepository"]
             CR["CourseRepository"]
             QR["QuizRepository"]
@@ -80,22 +80,22 @@ graph TB
 
 ```
 src/main/java/com/example/platform/
-├── 🚀 AiPlatformApplication.java     ← Point d'entrée Spring Boot
-├── 🤖 ai/                            ← Couche Intelligence Artificielle (5 classes)
-├── ⚙️ config/                        ← Configuration Spring & Sécurité (4 classes)
-├── 🎮 controller/                    ← Contrôleurs MVC (10 classes)
-├── 📋 dto/                           ← Objets de transfert de données (2 classes)
-├── 📨 event/                         ← Événements applicatifs (2 classes)
-├── 👂 listener/                      ← Gestionnaires d'événements (1 classe)
-├── 📊 model/                         ← Entités JPA (17 classes)
-├── 💾 repository/                    ← Interfaces Spring Data JPA (13 interfaces)
-└── ⚡ service/                       ← Logique métier (15 classes)
+├── AiPlatformApplication.java     ← Point d'entrée Spring Boot
+├── ai/                            ← Couche Intelligence Artificielle (5 classes)
+├── config/                        ← Configuration Spring & Sécurité (4 classes)
+├── controller/                    ← Contrôleurs MVC (10 classes)
+├── dto/                           ← Objets de transfert de données (2 classes)
+├── event/                         ← Événements applicatifs (2 classes)
+├── listener/                      ← Gestionnaires d'événements (1 classe)
+├── model/                         ← Entités JPA (17 classes)
+├── repository/                    ← Interfaces Spring Data JPA (13 interfaces)
+└── service/                       ← Logique métier (15 classes)
 ```
 
 ### 1.3 Rôle de Chaque Package
 
-| Package | 📝 Responsabilité | 📊 Classes |
-|:--------|:------------------|:----------:|
+| Package | Responsabilité | Nombre de Classes |
+|:--------|:---------------|:-----------------:|
 | **ai/** | Orchestration IA : génération de quiz, RAG, appels LLM | 5 |
 | **config/** | Configuration Spring Security, initialisation BDD | 4 |
 | **controller/** | Gestion des requêtes HTTP, routage, vues Thymeleaf | 10 |
@@ -110,21 +110,21 @@ src/main/java/com/example/platform/
 
 ```mermaid
 graph TB
-    subgraph PRESENTATION["🖥️ COUCHE PRÉSENTATION"]
+    subgraph PRESENTATION["COUCHE PRÉSENTATION"]
         direction LR
         T1["Thymeleaf Templates"]
         T2["Controllers MVC"]
         T3["REST APIs"]
     end
     
-    subgraph METIER["⚙️ COUCHE MÉTIER"]
+    subgraph METIER["COUCHE MÉTIER"]
         direction LR
         M1["Services"]
         M2["Agents IA"]
         M3["Event Listeners"]
     end
     
-    subgraph DONNEES["💾 COUCHE DONNÉES"]
+    subgraph DONNEES["COUCHE DONNÉES"]
         direction LR
         D1["Repositories"]
         D2["Entités JPA"]
@@ -180,45 +180,45 @@ sequenceDiagram
     Context->>RAG: DatabaseInitializer.onApplicationEvent()
     RAG->>RAG: Indexation des cours existants
     Context->>Tomcat: Démarrage serveur (port 8080)
-    Tomcat-->>JVM: ✅ Application Ready
+    Tomcat-->>JVM: Application Ready
 ```
 
 ### 2.3 Flux de Génération d'un Quiz
 
 ```mermaid
 sequenceDiagram
-    actor Student as 👨‍🎓 Étudiant
-    participant Browser as 🌐 Navigateur
+    actor Student as Étudiant
+    participant Browser as Navigateur
     participant QC as QuizController
     participant QS as QuizService
     participant AI as AgentIA
     participant RAG as RAGEngine
     participant LLM as GroqClient
-    participant DB as 💾 Database
+    participant DB as Database
     
     Student->>Browser: Clic "Générer Quiz"
     Browser->>QC: POST /quiz/generate
     QC->>QS: generateQuiz(courseId, studentId)
     
-    Note over QS: 📊 Analyse historique étudiant<br/>→ Décision difficulté
+    Note over QS: Analyse historique étudiant<br/>Décision difficulté
     
     QS->>AI: generateQuiz(courseId, topic, difficulty)
     AI->>RAG: retrieve(courseId, topic, topK=3)
-    RAG-->>AI: 📄 Chunks de contexte
+    RAG-->>AI: Chunks de contexte
     
     AI->>LLM: chat(systemPrompt, userPrompt)
-    LLM-->>AI: 📝 JSON [questions]
+    LLM-->>AI: JSON [questions]
     
     AI-->>QS: Réponse brute JSON
     
-    Note over QS: 🔄 Parsing JSON<br/>→ Création entités
+    Note over QS: Parsing JSON<br/>Création entités
     
     QS->>DB: save(Quiz + Questions + Choices)
     DB-->>QS: Quiz persisté
     
     QS-->>QC: Quiz créé
     QC-->>Browser: Redirect /quiz/{id}
-    Browser-->>Student: 📋 Affichage du quiz
+    Browser-->>Student: Affichage du quiz
 ```
 
 ---
@@ -277,26 +277,26 @@ classDiagram
 
 ### 3.2 AgentIA.java — Orchestrateur Principal
 
-| 📌 Aspect | 📝 Description |
-|-----------|----------------|
+| Aspect | Description |
+|--------|-------------|
 | **Responsabilité** | Coordonner la génération de contenu IA (quiz, flashcards, roadmaps) |
 | **Dépendances** | `GroqClient`, `RAGEngine` |
 | **Méthodes clés** | `generateQuiz()`, `generateFlashcards()`, `generateRoadmap()`, `evaluateAnswer()` |
 
 ```java
 public String generateQuiz(Long courseId, String topic, String difficulty, int numberOfQuestions) {
-    // 1️⃣ Récupère le contexte via RAG
+    // Étape 1 : Récupère le contexte via RAG
     List<String> contextChunks = ragEngine.retrieve(courseId, topic, 3);
     
-    // 2️⃣ Construit le prompt système + utilisateur
+    // Étape 2 : Construit le prompt système + utilisateur
     String systemPrompt = "You are an expert educational AI...";
     
-    // 3️⃣ Appelle le LLM
+    // Étape 3 : Appelle le LLM
     return groqClient.chat(systemPrompt, userPrompt);
 }
 ```
 
-> 💡 **Point technique** : L'agent utilise des prompts structurés avec instructions strictes pour garantir un format JSON parsable.
+**Point technique** : L'agent utilise des prompts structurés avec instructions strictes pour garantir un format JSON parsable.
 
 ---
 
@@ -304,13 +304,13 @@ public String generateQuiz(Long courseId, String topic, String difficulty, int n
 
 ```mermaid
 flowchart LR
-    subgraph INGEST["📥 Indexation"]
+    subgraph INGEST["Indexation"]
         A[Contenu cours] --> B[Chunking 500 chars]
         B --> C[Embedding HuggingFace]
         C --> D[(VectorStore en mémoire)]
     end
     
-    subgraph RETRIEVE["🔍 Recherche"]
+    subgraph RETRIEVE["Recherche"]
         E[Query utilisateur] --> F[Embedding query]
         F --> G[Similarité Cosinus]
         G --> H[Top-K résultats]
@@ -322,8 +322,8 @@ flowchart LR
     style RETRIEVE fill:#3b82f6,color:#fff
 ```
 
-| 📌 Aspect | 📝 Description |
-|-----------|----------------|
+| Aspect | Description |
+|--------|-------------|
 | **Stockage** | `Map<Long, List<VectorChunk>>` — En mémoire par cours |
 | **Chunking** | Paragraphes de ~500 caractères |
 | **Embeddings** | 384 dimensions (MiniLM via HuggingFace) |
@@ -352,15 +352,15 @@ private double cosineSimilarity(List<Double> v1, List<Double> v2) {
 
 ### 3.4 GroqClient.java — Client API LLM
 
-| 📌 Aspect | 📝 Description |
-|-----------|----------------|
+| Aspect | Description |
+|--------|-------------|
 | **LLM** | API Groq (llama-3.3-70b-versatile) |
 | **Embeddings** | API HuggingFace (all-MiniLM-L6-v2) |
 | **Configuration** | Injection `@Value` depuis `application.properties` |
 
 ```java
-private final RestClient groqRestClient;  // 🤖 Pour le LLM
-private final RestClient hfRestClient;    // 🔢 Pour les embeddings
+private final RestClient groqRestClient;  // Pour le LLM
+private final RestClient hfRestClient;    // Pour les embeddings
 ```
 
 ---
@@ -403,9 +403,9 @@ double averageScore = pastQuizzes.stream()
     .average().orElse(-1.0);
 
 if (averageScore >= 80.0) {
-    difficulty = "HARD";      // 🎯 Étudiant performant → Challenge
+    difficulty = "HARD";      // Étudiant performant → Challenge
 } else if (averageScore < 50.0) {
-    difficulty = "EASY";      // 📚 Difficultés → Remédiation
+    difficulty = "EASY";      // Difficultés → Remédiation
 }
 ```
 
@@ -473,8 +473,8 @@ erDiagram
 
 ### 4.1 Localisation de la Logique Principale
 
-| 🔄 Traitement | 📍 Localisation |
-|---------------|-----------------|
+| Traitement | Localisation |
+|------------|--------------|
 | Génération de quiz | `QuizService` → `AgentIA` → `RAGEngine` → `GroqClient` |
 | Calcul des scores | `QuizService.submitQuiz()` |
 | Validation des inscriptions | `EnrollmentService.validateEnrollment()` |
@@ -485,23 +485,23 @@ erDiagram
 
 ```mermaid
 flowchart LR
-    subgraph EXTERNE["☁️ APIs Externes"]
+    subgraph EXTERNE["APIs Externes"]
         GROQ["Groq API<br/>LLM"]
         HF["HuggingFace<br/>Embeddings"]
     end
     
-    subgraph IA["🤖 Couche IA"]
+    subgraph IA["Couche IA"]
         CLIENT["GroqClient"]
         RAG["RAGEngine"]
         AGENT["AgentIA"]
     end
     
-    subgraph METIER["⚙️ Couche Métier"]
+    subgraph METIER["Couche Métier"]
         QS["QuizService"]
         CS["CourseService"]
     end
     
-    subgraph DATA["💾 Couche Données"]
+    subgraph DATA["Couche Données"]
         REPO["Repositories"]
         DB[(Database)]
     end
@@ -528,10 +528,10 @@ sequenceDiagram
     participant FA as FeedbackAgent
     participant MA as MasteryAgent
     
-    Note over QS: Quiz complété !
+    Note over QS: Quiz complété
     
     QS->>EP: publishEvent(QuizCompletedEvent)
-    EP-->>QS: ✅ Retour immédiat
+    EP-->>QS: Retour immédiat
     
     Note over EL: @Async @EventListener
     
@@ -556,8 +556,8 @@ eventPublisher.publishEvent(new QuizCompletedEvent(this, quiz));
 @Async
 @EventListener
 public void handleQuizCompleted(QuizCompletedEvent event) {
-    feedbackAgent.generateFeedback(event);    // 💬 Génère feedback IA
-    masteryAgent.updateStudentModel(event);   // 📈 Met à jour la maîtrise
+    feedbackAgent.generateFeedback(event);    // Génère feedback IA
+    masteryAgent.updateStudentModel(event);   // Met à jour la maîtrise
 }
 ```
 
@@ -570,7 +570,7 @@ public void handleQuizCompleted(QuizCompletedEvent event) {
 ```java
 @Service
 public class QuizService {
-    private final QuizRepository quizRepository;  // ✅ final = immutable
+    private final QuizRepository quizRepository;  // final = immutable
     private final AgentIA agentIA;
     
     public QuizService(QuizRepository quizRepository, AgentIA agentIA) {
@@ -580,8 +580,8 @@ public class QuizService {
 }
 ```
 
-| ✅ Avantage | 📝 Description |
-|-------------|----------------|
+| Avantage | Description |
+|----------|-------------|
 | **Immutabilité** | Champs `final` garantissent l'état |
 | **Testabilité** | Facile à mocker pour tests unitaires |
 | **Explicite** | Dépendances visibles dans le constructeur |
@@ -590,7 +590,7 @@ public class QuizService {
 
 ```mermaid
 mindmap
-  root((🏗️ Design Patterns))
+  root((Design Patterns))
     Repository
       CourseRepository
       UserRepository
@@ -616,8 +616,8 @@ mindmap
 
 ### 5.3 Séparation des Responsabilités (SRP)
 
-| 🏷️ Classe | 🎯 Responsabilité Unique |
-|-----------|--------------------------|
+| Classe | Responsabilité Unique |
+|--------|-----------------------|
 | `GroqClient` | Communication API externe |
 | `RAGEngine` | Recherche vectorielle |
 | `AgentIA` | Construction des prompts |
@@ -632,7 +632,7 @@ mindmap
 
 ```mermaid
 graph TB
-    subgraph CHOIX["🎯 Décisions Techniques"]
+    subgraph CHOIX["Décisions Techniques"]
         A["RAG en mémoire<br/><i>Simplicité prototype</i>"]
         B["Groq API<br/><i>Temps de réponse rapides</i>"]
         C["HuggingFace Embeddings<br/><i>API gratuite</i>"]
@@ -649,16 +649,16 @@ graph TB
 
 ### 6.2 Parties Critiques du Code
 
-| 🔴 Point Critique | 📍 Localisation | 📝 Description |
-|-------------------|-----------------|----------------|
+| Point Critique | Localisation | Description |
+|----------------|--------------|-------------|
 | **Parsing JSON LLM** | `QuizService:81-98` | Extraction robuste avec `indexOf("[")` |
 | **Similarité Cosinus** | `RAGEngine:98-108` | Cœur du système RAG |
 | **Validation inscription** | `QuizService:186-188` | Score ≥60% → Validation auto |
 
 ### 6.3 Limitations et Évolutions Possibles
 
-| ⚠️ Limitation | 💥 Impact | 💡 Solution |
-|---------------|-----------|-------------|
+| Limitation | Impact | Solution |
+|------------|--------|----------|
 | RAG en mémoire | Perte au redémarrage | Vector store persistant (Chroma) |
 | Pas de cache LLM | Appels coûteux | Redis/Caffeine cache |
 | Single-thread RAG | Lent gros volumes | Index parallélisé |
@@ -673,18 +673,18 @@ ai.groq.model=llama-3.3-70b-versatile
 ai.huggingface.embedding-api=https://router.huggingface.co/...
 ```
 
-> 🔐 Les clés API sont injectées via variables d'environnement avec valeurs par défaut.
+**Note de sécurité** : Les clés API sont injectées via variables d'environnement avec valeurs par défaut.
 
 ---
 
-## 🎓 Conclusion Technique
+## Conclusion Technique
 
 Ce projet illustre une **architecture Spring Boot moderne** combinant :
 
-- ✅ Séparation claire des responsabilités (Layered Architecture)
-- ✅ Intégration LLM via clients REST
-- ✅ Système RAG simplifié mais fonctionnel
-- ✅ Programmation événementielle asynchrone
-- ✅ Injection de dépendances systématique
+- Séparation claire des responsabilités (Layered Architecture)
+- Intégration LLM via clients REST
+- Système RAG simplifié mais fonctionnel
+- Programmation événementielle asynchrone
+- Injection de dépendances systématique
 
 La structure du code facilite l'**extension** (nouveaux types de questions, autres LLMs) et la **maintenance** grâce aux bonnes pratiques appliquées.
